@@ -1,42 +1,29 @@
-#include <iostream>
-#include <fstream>
-#include <string>
-#include <algorithm>
-#include <vector>
-#include <queue>
-#include <functional>
-#include <sstream>
-
-#define MAX 10
+#include "PriorityQueue.h"
 #define INF 9999999
 using namespace std;
-template<typename T> void print_queue(T& q)
-{
-    while (!q.empty()) {
-        cout << q.top() << ",";
-        q.pop();
-    }
-    cout << endl;
-}
 int main(int argc, const char * argv[])
 {
-    priority_queue<int> m;
-    for (int n: {3, 4, -4, -3}) {
-        m.push(n);
+    if (argc < 3) {
+        cout <<"Error:Not enough args" << endl;
+        exit(1);
     }
-    print_queue(m);
-    ifstream fin("in.txt");
-    
+    ifstream fin(argv[1]);
+    ofstream fout(argv[2]);
+    if(!fin.is_open()){
+        fout<<"Could not open the input file";
+        exit(1);
+    }
+    int vertextNum = 0;
+    int s = 0;
     using T_data = pair<int,int>;
     using T_row  = vector<T_data>;
     using T_vec  = vector<T_row>;
-    vector < vector < pair <int, int> > > g(3);
-    g[0].push_back(make_pair(1,3));
-    g[0].push_back(make_pair(3,5));
-
-    cout << "VEC" <<g[0][1].first << endl;
+    fin >> vertextNum;
+    fin.get();
+    fin >> s;
+    fin.get();
+    
     T_vec vec;
-    int s = 1;
     string str;
     while (getline(fin, str)) {
         istringstream iss(str);
@@ -50,15 +37,17 @@ int main(int argc, const char * argv[])
         }
         vec.emplace_back(r);
     }
-   
-    vector<int> d(6, INF);
+    double d[vertextNum];
+    for (int i = 0; i < vertextNum; ++i) {
+        d[i] = INF;
+    }
     d[s] = 0;
-    priority_queue<pair<int, int> > q;
-    q.push(make_pair(0, s));
-    while (!q.empty()) {
-        int v = q.top().second;
-        int cur_d = -q.top().first;
-        q.pop();
+    PriorityQueue queue;
+    queue.enqueue(0, s);
+    while (!queue.isEmpty()) {
+        int v = queue.top('p');
+        int cur_d = -queue.top('v');
+        queue.dequeue();
         if(cur_d > d[v]) continue;
         for(size_t j = 0; j < vec[v].size(); ++j)
         {
@@ -67,18 +56,19 @@ int main(int argc, const char * argv[])
             if(d[v] + len < d[to])
             {
                 d[to] = d[v] + len;
-                q.push(make_pair(-d[to], to));
+                queue.enqueue(-d[to], to);
             }
         }
     }
-    for(int i = 0; i < 6; ++i)
-        cout << d[i] << ",";
-    cout << endl;
-    for(const auto& row: vec){
-        for(const auto& data: row)
-            cout << "(" << data.first << "," << data.second << ")";
-        cout<<endl;
+    fout << "Trip length from " << s <<" to vertex:"<<endl;
+    for(int i = 0; i < vertextNum; ++i)
+    {
+        if (i!=s) {
+            fout << i << " is " << d[i] << endl;
+        }
     }
+    fin.close();
+    fout.close();
     return 0;
 }
 

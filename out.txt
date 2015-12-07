@@ -1,1 +1,6 @@
-64
+Trip length from 0 to vertex:
+1 is 7
+2 is 9
+3 is 20
+4 is 20
+5 is 11
