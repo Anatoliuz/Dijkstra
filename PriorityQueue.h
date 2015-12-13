@@ -19,6 +19,14 @@
 #include <queue>
 #include <functional>
 #include <sstream>
+
+#define INF 9999999
+
+using T_data = std::pair<int,int>;
+using T_row  = std::vector<T_data>;
+using T_vec  = std::vector<T_row>;
+
+
 class PriorityQueue {
     static const int MAX_SIZE = 1000;
     int size;
