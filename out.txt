@@ -1,6 +1,6 @@
-Trip length from 0 to vertex:
-1 is 7
-2 is 9
-3 is 20
-4 is 20
-5 is 11
+Trip length from 1 to vertex:
+0 is 1
+2 is 2
+3 is 6
+4 is 1e+07
+5 is 7

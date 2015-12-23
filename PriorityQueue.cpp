@@ -30,9 +30,9 @@ void PriorityQueue::down(int i) {
              size = 0;
     }
     
-    void PriorityQueue::enqueue(double value, double vertex) {
+    void PriorityQueue::enqueue(double length, double vertex) {
         assert(size + 1 < MAX_SIZE);
-        a[size++] = Elem(value, vertex);
+        a[size++] = Elem(length, vertex);
         up(size - 1);
     }
     
@@ -42,10 +42,10 @@ void PriorityQueue::down(int i) {
         down(0);
     }
     int PriorityQueue::top(char c){
-        int tempVal = a[0].val;
-        int tempPr  = a[0].vertex;
-        if(c == 'v') return tempVal;
-        if(c == 'p') return tempPr;
+        int tempLength = a[0].length;
+        int tempVertex  = a[0].vertex;
+        if(c == 'l') return tempLength;
+        if(c == 'v') return tempVertex;
         else return - 10000;
         
     }

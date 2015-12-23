@@ -31,10 +31,10 @@ class PriorityQueue {
     static const int MAX_SIZE = 1000;
     int size;
     struct Elem {
-        double val;
+        double length;
         double vertex;
         Elem(int v = 0, int p = 0) {
-            val = v;
+            length = v;
             vertex = p;
         }
     } a[MAX_SIZE];
@@ -42,7 +42,7 @@ class PriorityQueue {
     void down(int i);
 public:
     PriorityQueue() ;
-    void enqueue(double value, double priority);
+    void enqueue(double length, double vertex);
     void dequeue() ;
     int top(char c);
     bool isEmpty();

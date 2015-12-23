@@ -23,8 +23,8 @@ void Dijkstra( char* argv[])
     PriorityQueue queue;
     queue.enqueue(0, s);
     while (!queue.isEmpty()) {
-        int v = queue.top('p');
-        int cur_d = queue.top('v');
+        int v = queue.top('v');
+        int cur_d = queue.top('l');
         queue.dequeue();
         if(cur_d > d[v]) continue;
         for(size_t j = 0; j < vec[v].size(); ++j)
