@@ -7,7 +7,7 @@
 //
 #include "fileWork.h"
 void Printf(int vertextNum, int s, double* d, std::ofstream &fout){
-    fout << "Trip length from " << s <<" to vertex:"<<std::endl;
+    fout << "Trip length from vertex " << s <<" to vertex:"<<std::endl;
     for(int i = 0; i < vertextNum; ++i)
     {
         if (i!=s) {
@@ -33,6 +33,7 @@ T_vec ReadData( char** argv, int* vertextNum, int* startPoint)
     fin.get();
     
     T_vec vec;
+    
     std::string str;
     while (getline(fin, str)) {
         std::istringstream iss(str);

@@ -1,15 +1,8 @@
-//
-//  PriorityQueue.cpp
-//  Dijkstra(version 2)
-//
-//  Created by fix on 06/12/15.
-//  Copyright (c) 2015 Anatoly Filinov. All rights reserved.
-//
-
+//minQueue
 #include "PriorityQueue.h"
 
 void PriorityQueue::up(int i) {
-        while (i != 0 && a[i].vertex > a[(i - 1) / 2].vertex) {
+        while (i != 0 && a[i].length < a[(i - 1) / 2].length) {
             std::swap(a[i], a[(i - 1) / 2]);
             i = (i - 1) / 2;
         }
@@ -17,9 +10,9 @@ void PriorityQueue::up(int i) {
 void PriorityQueue::down(int i) {
         while (i < size / 2) {
             int maxI = 2 * i + 1;
-            if (2 * i + 2 < size && a[2 * i + 2].vertex > a[2 * i + 1].vertex)
+            if (2 * i + 2 < size && a[2 * i + 2].length < a[2 * i + 1].length)
                 maxI = 2 * i + 2;
-            if (a[i].vertex >= a[maxI].vertex)
+            if (a[i].length <= a[maxI].length)
                 return;
             std::swap(a[i], a[maxI]);
             i = maxI;
@@ -47,7 +40,6 @@ void PriorityQueue::down(int i) {
         if(c == 'l') return tempLength;
         if(c == 'v') return tempVertex;
         else return - 10000;
-        
     }
     bool PriorityQueue::isEmpty() {
         return size == 0;

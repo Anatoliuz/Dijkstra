@@ -10,6 +10,7 @@
 #define __Dijkstra_version_2___fileWork__
 
 #include "PriorityQueue.h"
+
 T_vec ReadData( char* argv[], int*, int*);
 void Printf(int vertextNum, int s, double* d, std::ofstream &fout);
 
